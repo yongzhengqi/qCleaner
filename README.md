@@ -2,7 +2,8 @@
 a file cleaner for oiers
 
 # How it works
-The program scan the file you selected and delete `233.exe` if `233.cpp` can be found in the same folder
+The program scan the 
+folder(include subfolders) you select and delete `.exe` files if a `.cpp` with the same name can be found in the same folder 
 
 # How to use
 Download `qCleaner.zip` from https://github.com/yongzhengqi/qCleaner/releases
