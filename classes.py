@@ -17,7 +17,7 @@ class Main(QWidget):
         self.show()
 
     def InitWidget(self):
-        PathLabel = QLabel("操作目录")
+        PathLabel = QLabel("操作目录：")
 
         PathEdit = QLineEdit()
 
@@ -27,13 +27,17 @@ class Main(QWidget):
         ProcessButton = QPushButton("清理")
         ProcessButton.clicked.connect(lambda: MainProcessGuide(PathEdit.text()))
 
+        AboutButton = QPushButton("关于")
+        AboutButton.clicked.connect(AboutThisProject)
+
         self.MainGrid = QGridLayout()
         self.MainGrid.setSpacing(10)
 
         self.MainGrid.addWidget(PathLabel, 1, 1)
         self.MainGrid.addWidget(PathEdit, 1, 2)
         self.MainGrid.addWidget(BrowseButton, 1, 3)
-        self.MainGrid.addWidget(ProcessButton, 2, 1, 1, 3)
+        self.MainGrid.addWidget(ProcessButton, 2, 1, 1, 2)
+        self.MainGrid.addWidget(AboutButton, 2, 3)
 
 
 class ProcessModule(QDialog):
@@ -117,3 +121,30 @@ class ProcessModule(QDialog):
                     self.UpdateData(path)
 
                     os.remove(path + os.sep + ExecutableFile)
+
+
+class AboutPage(QDialog):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("About qCleaner")
+        self.setWindowIcon(QIcon("icon.png"))
+
+        ProjectPageGuide = QLabel("Project Page:")
+        ProjectPageLink = QLabel("""<a href="https://github.com/yongzhengqi/qCleaner">https://github.com/yongzhengqi/qCleaner</a>""")
+        ProjectPageLink.setOpenExternalLinks(True)
+
+        ProjectLicenseGuide = QLabel("Project License:")
+        ProjectLicense = QLabel("""<a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GNU General Public License v3.0</a>""")
+        ProjectLicense.setOpenExternalLinks(True)
+
+        ExitButton = QPushButton("确定")
+        ExitButton.clicked.connect(self.close)
+
+        GridLayout = QGridLayout()
+        self.setLayout(GridLayout)
+        GridLayout.addWidget(ProjectPageGuide, 1, 1)
+        GridLayout.addWidget(ProjectPageLink, 1, 2)
+        GridLayout.addWidget(ProjectLicenseGuide, 2, 1)
+        GridLayout.addWidget(ProjectLicense, 2, 2)
+        GridLayout.addWidget(ExitButton, 3, 1, 1, 3)

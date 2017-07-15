@@ -8,7 +8,7 @@ def MainProcessGuide(path):
         RaiseWarning("路径错误")
         return
 
-    if not GetConfirm("数据无价请先做好备份工作"):
+    if not GetConfirm("数据无价，请先做好备份工作"):
         RaiseMessage("清理已终止")
         return
 
@@ -47,3 +47,9 @@ def GetConfirm(info):
     MessageBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
     MessageBox.setWindowTitle("Please Confirm")
     return MessageBox.exec_() == QMessageBox.Ok
+
+def AboutThisProject():
+    from classes import AboutPage
+    
+    AboutPageDialog = AboutPage()
+    AboutPageDialog.exec_()
